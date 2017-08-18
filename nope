@@ -1,0 +1,16 @@
+with open('test_filenames.csv', 'rt') as csvfile:
+    image_filenames = []
+    reader = csv.reader(csvfile)
+    for row in reader:
+        image_filenames.append(row)
+image_filenames = image_filenames[1:]
+
+fieldnames = ['images', 'labels']
+
+with open(r'C:\Projects\Programming\Retina\test_filenames_new.csv', 'w', newline='') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for filename in image_filenames:
+        filee = filename[0]
+        index = re.split('(\d+)', filee)[1]
+        writer.writerow({'images': index, 'labels': filee})
